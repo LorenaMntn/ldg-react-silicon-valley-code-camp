@@ -1,0 +1,17 @@
+/node_modules
+.DS_Store
+/.next/
+/out/
+/.pnp
+.pnp.js
+/coverage
+*.pem
+/build
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.vercel
