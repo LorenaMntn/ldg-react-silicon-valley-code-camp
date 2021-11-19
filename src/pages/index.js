@@ -1,6 +1,9 @@
+import App from "../components/App"
+
+
 const IndexPage = () => {
     return (
-        <div>Test</div>
+       <App/>
     );
 }
 
