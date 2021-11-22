@@ -6,10 +6,12 @@ const Head = styled.section`
     display: flex;
     align-items: center;
     justify-content: space-between;
+   
 
     p{
        font-size: 25px;
        font-weight: bold;
+       color: ${({ theme }) => (theme === "light" ? "" : "#f8f8f8")};
     }
 
 
@@ -17,6 +19,7 @@ const Head = styled.section`
         display: flex;
         align-items: center;
         padding: 0 5px;
+        color: ${({ theme }) => (theme === "light" ? "" : "#51b5b1")};
 
         button{
             height: 25px;
@@ -30,9 +33,9 @@ const Head = styled.section`
     }
 
 `        
-const Header = () => {
+const Header = ({theme}) => {
     return (
-        <Head>
+        <Head theme={theme}>
             <img src="/assets/SVCClogo.png"  alt="SVCC logo" width="100" height="25"/>
             <p>Silicon Valley Code Camp</p>
             <div>
