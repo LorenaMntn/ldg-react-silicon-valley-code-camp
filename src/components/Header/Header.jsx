@@ -37,7 +37,7 @@ const Header = ({theme}) => {
             <img src="/assets/SVCClogo.png"  alt="SVCC logo" width="100" height="25"/>
             <p>Silicon Valley Code Camp</p>
             <div>
-                <h4>Hello Popescu!</h4>
+                <h4>Hello Mike!</h4>
                 <button>Sign-out</button>
             </div>
         </Head> 

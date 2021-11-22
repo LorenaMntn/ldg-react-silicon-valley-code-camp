@@ -27,7 +27,7 @@ const SpeakerStyle = styled.div`
     
     img{
         width: 100%;
-        height: 280px;
+        height: 350px;
     }
 
     p{
@@ -102,12 +102,13 @@ const SessionListStyle = styled.div`
        font-weight: normal;
     }
 `
-const SpeakerContainer = ({theme}) => {
+
+const SpeakerContainer = ({theme, showSessions}) => {
  
     return(
         <ContainerStyle theme={theme}>       
                 {data.map(function (speaker) {
-                    return  <SpeakerCards theme={theme}><Speaker key={speaker.id} speaker={speaker}/></SpeakerCards>;
+                    return  <SpeakerCards theme={theme}><Speaker key={speaker.id} speaker={speaker} showSessions={showSessions}/></SpeakerCards>;
                 })}   
         </ContainerStyle>
     )
@@ -158,12 +159,12 @@ return (
 const FavoriteFunctionality = () => {
     return(
         <FavoriteStyle>
-            <a><FontAwesomeIcon icon={faStar}/> <h4>Favorite</h4> </a> 
+            <a><FontAwesomeIcon icon={faStar}/><h4>Favorite</h4> </a> 
         </FavoriteStyle>
     )
 }
 
-const SessionList = ({sessions}) => {
+const Sessions = ({sessions}) => {
     return(
         <SessionListStyle><Session session = {sessions[0]}/></SessionListStyle>
     )

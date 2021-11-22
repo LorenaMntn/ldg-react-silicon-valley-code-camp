@@ -6,6 +6,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 const WhiteVsDarkTheme = ({ theme }) => theme === "light" ? "#e6e6e6" : "#575757";
 const ToDarkTheme = ({ theme }) => theme === "light" ? "" : "#e6e6e6";
 
+
 const Container = styled.section`
   border-top: 0.1em solid ${WhiteVsDarkTheme};
   border-bottom: 0.1em solid ${WhiteVsDarkTheme};
@@ -151,15 +152,14 @@ const SearchContainerStyle = styled.div`
         }
     }
 `
-const Toolbar = ({ theme, setTheme, showSessions, setShowSessions}) => {
-    const [eventYear, setEventYear] = useState(2020);
+const Toolbar = ({ theme, setTheme, eventYear, setEventYear, showSessions, setShowSessions}) => {
        return (
         <Container theme={theme}>
           <Wrapper theme={theme}>
-            <YearContainer>
+            <YearContainer >
                 <p>Year</p>
                 <select id="year" name="year" value={eventYear}>
-                    <option>2019</option>
+                    <option>{eventYear}</option>
                 </select>
             </YearContainer>
             <SessionsContainer 
@@ -178,7 +178,7 @@ const Toolbar = ({ theme, setTheme, showSessions, setShowSessions}) => {
     )
 }
 
-function SessionsContainer({theme, setShowSessions, showSessions}) {
+function SessionsContainer({theme, showSessions, setShowSessions}) {
     return (
       <ToolbarContainerStyle theme={theme}>
         <p>Show Sessions</p>
@@ -188,11 +188,11 @@ function SessionsContainer({theme, setShowSessions, showSessions}) {
             <input
                   type="checkbox"
                     checked={showSessions}
-                    onChange={ e => setShowSessions(e.target.checked)}
+                    onChange={e => setShowSessions(e.target.checked)}
                   />
                 <span className="switch"></span>
             </label>
-           </div>
+           </div> 
          </SessionToggleContainer>     
       </ToolbarContainerStyle>
     );
