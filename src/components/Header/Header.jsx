@@ -7,13 +7,11 @@ const Head = styled.section`
     align-items: center;
     justify-content: space-between;
    
-
     p{
        font-size: 25px;
        font-weight: bold;
        color: ${({ theme }) => (theme === "light" ? "" : "#f8f8f8")};
     }
-
 
     div{
         display: flex;
@@ -31,8 +29,8 @@ const Head = styled.section`
             color: #ffff;
         }
     }
+`    
 
-`        
 const Header = ({theme}) => {
     return (
         <Head theme={theme}>

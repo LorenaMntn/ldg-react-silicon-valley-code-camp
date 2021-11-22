@@ -4,18 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const WhiteVsDarkTheme = ({ theme }) => theme === "light" ? "#e6e6e6" : "#575757";
+const ToDarkTheme = ({ theme }) => theme === "light" ? "" : "#e6e6e6";
 
 const Container = styled.section`
   border-top: 0.1em solid ${WhiteVsDarkTheme};
   border-bottom: 0.1em solid ${WhiteVsDarkTheme};
-`;
-
+`
 const Wrapper = styled.div`
     max-width: max(1000px, 100% - 100px);
     margin: 0 auto;
-    display: flex;    
+    display: flex;   
+    color: ${ToDarkTheme}
 `
-
 const YearContainer = styled.div`
       display:flex;
       flex-direction: row;
@@ -35,7 +35,6 @@ const YearContainer = styled.div`
         border-radius: 2px;
       }
 `
-
 const ToolbarContainerStyle = styled.div`
    border-left: 0.1em solid ${({ theme }) => theme === "light" ? "#e6e6e6" : "#575757"};
    display: flex;
@@ -47,7 +46,6 @@ const ToolbarContainerStyle = styled.div`
       font-weight: bold;
    }
 `
-
 const SessionToggleContainer = styled.label`
 
     .control {
@@ -94,7 +92,6 @@ const SessionToggleContainer = styled.label`
     }
 }
 `
-
 const FavoriteContainerStyle = styled.div`
         display: flex;
         align-items: center;
@@ -105,7 +102,6 @@ const FavoriteContainerStyle = styled.div`
           font-weight: bold;
       }
 `
-
 const ThemeContainerStyle = styled.div`
       display:flex;
       padding: 0.5em 0;
@@ -124,7 +120,6 @@ const ThemeContainerStyle = styled.div`
         border-radius: 2.5px;
       }
 `
-
 const SearchContainerStyle = styled.div` 
     display:flex;
     align-items: center;  
@@ -156,27 +151,25 @@ const SearchContainerStyle = styled.div`
         }
     }
 `
-
-const Toolbar = ({ theme, setTheme}) => {
+const Toolbar = ({ theme, setTheme, showSessions, setShowSessions}) => {
     const [eventYear, setEventYear] = useState(2020);
-
-    return (
+       return (
         <Container theme={theme}>
-          <Wrapper>
+          <Wrapper theme={theme}>
             <YearContainer>
                 <p>Year</p>
                 <select id="year" name="year" value={eventYear}>
                     <option>2019</option>
                 </select>
             </YearContainer>
-
-            <SessionsContainer theme={theme}
-                //  showSessions={showSessions}
-                //  setShowSessions={setShowSessions}
+            <SessionsContainer 
+                 theme={theme}
+                 showSessions={showSessions}
+                 setShowSessions={setShowSessions}
             />   
            </Wrapper> 
 
-           <Wrapper style={{display:"flex", justifyContent: "space-between", borderTop:"1px solid #e0e0e0"}}>
+           <Wrapper  theme={theme} style={{display:"flex", justifyContent: "space-between", borderTop:"1px solid #e6e6e6"}}>
               <FavoriteContainer />
               <ThemeContainer theme={theme} setTheme={setTheme}/>
               <SearchContainer/>
@@ -185,20 +178,20 @@ const Toolbar = ({ theme, setTheme}) => {
     )
 }
 
-function SessionsContainer({theme}) {
+function SessionsContainer({theme, setShowSessions, showSessions}) {
     return (
       <ToolbarContainerStyle theme={theme}>
         <p>Show Sessions</p>
-         <SessionToggleContainer>
+         <SessionToggleContainer theme={theme}>
           <div className="control">
-                <input
+          <label>
+            <input
                   type="checkbox"
-                  //checked={showSessions}
-                //   onChange={(event) => {
-                //     setShowSessions(event.target.checked);
-                //   }}
-                />
+                    checked={showSessions}
+                    onChange={ e => setShowSessions(e.target.checked)}
+                  />
                 <span className="switch"></span>
+            </label>
            </div>
          </SessionToggleContainer>     
       </ToolbarContainerStyle>
@@ -213,9 +206,6 @@ function FavoriteContainer(){
             <div className="control">
                 <input
                     type="checkbox"
-                    onChange={(event) => {
-                    setShowSessions(event.target.checked);
-                    }}
                 />
                 <span className="switch"></span>
             </div>
@@ -236,13 +226,13 @@ function ThemeContainer({theme, setTheme}){
     )
 }
 
-function SearchContainer({ setSearchSpeaker }) {
+function SearchContainer({theme}) {
     return (
-      <SearchContainerStyle>
+      <SearchContainerStyle >
         <input
           type="text"
           placeholder="Search..."></input>
-        <button><FontAwesomeIcon icon={faSearch} /></button>
+        <button theme={theme}><FontAwesomeIcon icon={faSearch} /></button>
       </SearchContainerStyle>
     );
 }

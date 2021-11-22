@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { data } from "../SpeakerData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faBuilding } from '@fortawesome/free-solid-svg-icons'
+import { faBuilding, faStar } from '@fortawesome/free-solid-svg-icons'
 
 const ContainerStyle = styled.div`
     max-width: max(1000px, 100% - 100px);
@@ -10,22 +10,28 @@ const ContainerStyle = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 5px;
+    color: ${({ theme }) => (theme === "light" ? "black" : "#f8f8f8")};
 `
 const SpeakerCards = styled.div`
     width: 300px;
+    
+    min-height: 550px;
     margin: 25px 0 0;
-    border: 1px solid #e0e0e0;
+    border: 1px solid ${({ theme }) => theme === "light" ? "#e6e6e6" : "#575757"};
     border-radius: 2px;
     padding: 1.5em 1.5em 1em;  
 `
 const SpeakerStyle = styled.div`
+    height: 100%;
+    position: relative;
+    
     img{
         width: 100%;
         height: 280px;
     }
 
     p{
-       margin: 5px;
+       margin: 5px 0;
        font-size: 25px;
        font-weight: bold; 
     }
@@ -67,39 +73,47 @@ const CompanyDetails = styled.div`
     }
 `
 const FavoriteStyle = styled.div`
-    display:flex; 
-    align-items: center;
     margin: 0.5em 0 1em; 
+
     a{
-        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        color: lightblue;
+
+        h4{
+            margin-left: 5px;
+        }
+
+        :active{
+            color: orange;
+        }
     }
 `
 const SessionListStyle = styled.div`
     width: 280px;
+    min-height: 75px;
     padding: .5em;
     border: 1px solid #e0e0e0;
     border-radius: 3px;
     background-color: #e0e0e0;
-
     p{
        margin: .2em 0;
        font-size: 17px;
        font-weight: normal;
     }
 `
-
-
-const SpeakerContainer = () => {
+const SpeakerContainer = ({theme}) => {
+ 
     return(
-        <ContainerStyle>       
+        <ContainerStyle theme={theme}>       
                 {data.map(function (speaker) {
-                    return  <SpeakerCards><Speaker key={speaker.id} speaker={speaker} /></SpeakerCards>;
+                    return  <SpeakerCards theme={theme}><Speaker key={speaker.id} speaker={speaker}/></SpeakerCards>;
                 })}   
         </ContainerStyle>
     )
 }
 
-const Speaker = ({speaker}) => {
+const Speaker = ({speaker, showSessions}) => {
     const { id, first, last, favorite, sessions} = speaker;  
     return ( 
          <SpeakerStyle>
@@ -112,7 +126,7 @@ const Speaker = ({speaker}) => {
                 <FavoriteFunctionality favorite={favorite}/>
                 <SpeakerDetails {...speaker}/> 
             </section>
-            <SessionList sessions={sessions}/> 
+            {showSessions === true ? <Sessions sessions={sessions} /> : null}
          </SpeakerStyle>        
     )
 }
@@ -120,7 +134,7 @@ const Speaker = ({speaker}) => {
 const SpeakerDetails = ({bio, company, twitterHandle}) => {
 return (
         <section>
-            <h4>{bio}</h4>
+            <h4 style={{minHeight: '70px'}}>{bio}</h4>
             <CompanyDetails>
                 <aside>
                     <a><FontAwesomeIcon icon={faBuilding} style={{fontSize: "20px", color: "lightblue", margin: "5px 0 0 6px"}}/></a>
@@ -144,8 +158,7 @@ return (
 const FavoriteFunctionality = () => {
     return(
         <FavoriteStyle>
-            <a><FontAwesomeIcon icon={[ faStar]}/></a>
-            <h4>Favorite</h4>
+            <a><FontAwesomeIcon icon={faStar}/> <h4>Favorite</h4> </a> 
         </FavoriteStyle>
     )
 }

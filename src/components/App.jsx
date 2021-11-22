@@ -18,11 +18,13 @@ const GlobalStyles = createGlobalStyle`
   
 const App = () => {
   const [theme, setTheme] = useState("light");
+  const [showSessions, setShowSessions] = useState(false);
+
   return (
     <Container>
       <GlobalStyles theme={theme} />
       <Header theme={theme} />
-      <SpeakerToolbar  theme={theme} setTheme={setTheme} />
+      <SpeakerToolbar theme={theme} setTheme={setTheme} showSessions={showSessions} setShowSessions={setShowSessions}/>
     </Container>
   );
 }
