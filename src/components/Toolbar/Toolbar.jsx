@@ -188,7 +188,7 @@ function SessionsContainer({theme, showSessions, setShowSessions}) {
             <input
                   type="checkbox"
                     checked={showSessions}
-                    onChange={e => setShowSessions(e.target.checked)}
+                    onClick={e => setShowSessions(e.target.checked)}
                   />
                 <span className="switch"></span>
             </label>
