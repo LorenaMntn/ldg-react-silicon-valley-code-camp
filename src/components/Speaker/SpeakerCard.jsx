@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { data } from "../SpeakerData";
+import { data } from "../Data";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding, faStar } from '@fortawesome/free-solid-svg-icons'
 
@@ -93,13 +93,15 @@ const SessionListStyle = styled.div`
     width: 280px;
     min-height: 75px;
     padding: .5em;
-    border: 1px solid #e0e0e0;
     border-radius: 3px;
-    background-color: #e0e0e0;
+    background-color: #f8f8f8;
+    color: ${({ theme }) => theme === "light" ? "#e6e6e6" : "#575757"};
+
     p{
        margin: .2em 0;
        font-size: 17px;
        font-weight: normal;
+       
     }
 `
 
@@ -114,7 +116,7 @@ const SpeakerContainer = ({theme, showSessions}) => {
     )
 }
 
-const Speaker = ({speaker, showSessions}) => {
+const Speaker = ({speaker, showSessions,theme}) => {
     const { id, first, last, favorite, sessions} = speaker;  
     return ( 
          <SpeakerStyle>
@@ -164,9 +166,9 @@ const FavoriteFunctionality = () => {
     )
 }
 
-const Sessions = ({sessions}) => {
+const Sessions = ({sessions, theme}) => {
     return(
-        <SessionListStyle><Session session = {sessions[0]}/></SessionListStyle>
+        <SessionListStyle theme={theme}><Session session = {sessions[0]}/></SessionListStyle>
     )
 }
 

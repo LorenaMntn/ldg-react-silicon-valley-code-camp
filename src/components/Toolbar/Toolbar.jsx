@@ -159,7 +159,7 @@ const Toolbar = ({ theme, setTheme, eventYear, setEventYear, showSessions, setSh
             <YearContainer >
                 <p>Year</p>
                 <select id="year" name="year" value={eventYear}>
-                    <option>{eventYear}</option>
+                    <option>2019</option>
                 </select>
             </YearContainer>
             <SessionsContainer 
