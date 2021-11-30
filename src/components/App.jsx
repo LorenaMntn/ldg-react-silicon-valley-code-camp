@@ -14,11 +14,10 @@ const GlobalStyles = createGlobalStyle`
   body{
     background-color: ${({ theme }) => theme === "light" ? "#ffffff" : "#242424"};
   }
-`;
+`
   
 const App = () => {
   const [theme, setTheme] = useState("light");
-  
   return (
     <Container>
       <GlobalStyles theme={theme} />
